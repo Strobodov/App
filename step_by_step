@@ -1,0 +1,129 @@
+Step 0: create a fresh directory on your computer for this tutorial. Documents/myapp would be a nice place to start. From now on, this directory will be called your project directory.
+
+Step 1: open a text editor to make a HTML file.
+Step 2: paste the following code into the file:
+
+ <!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- set AT Computing font -->
+    <link href='https://fonts.googleapis.com/css?family=Source Sans Pro' rel='stylesheet'>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+    a:hover {
+  color:#3b4048;
+text-decoration:none;
+}
+    </style>
+
+    <title>C-level Container Challenge</title>
+  </head>
+  <body>
+<div class="jumbotron jumbotron-fluid" style="background:#057cfb">
+  <div class="container" style="font-family: 'Source Sans Pro'">
+	<h1 class="display-4" style="color:#ffffff">Hello, world!</h1>
+	<p class="lead" style="color:#ffffff">Congratulations. This is your very first, fully responsive Bootstrap/HTML webapp in the Cloud.</p>
+    		<div class="card" align="center" style="width: 80%; background:#057cfb; border:none">
+  			<img src="at_logo_white.png" class="card-img-top">
+		</div>
+	</div>
+<footer class="footer mt-auto py-3">
+  <div class="container" style="background:#ffffff; font-family: 'Source Sans Pro'" align="center">
+    <span><a href="https://atcomputing.nl" target="_blank">www.atcomputing.nl</a></span>
+  </div>
+</footer></div>
+</body>
+</html>
+
+Step 3: when you save the file, make sure you save it within your project directory in a new subdirectory called "public-html". Dive the text-file itself the following name: index.html
+
+Step 4: now go to the html-file and open it with your browser. You should see a page displaying "Hello, world!" and some square without any content. If this is the case, you've succesfully completed the first fase of app creation! Congratulations.
+
+Step 5: Install Docker
+On Fedora, RHEL or CentOS:
+<command> sudo yum install docker
+
+On Debian or Ubuntu:
+<command> sudo apt-get docker
+
+Enter your administrator password
+
+Docker will now install on your computer. You can check it afterwards by entering:
+
+<command> docker
+
+Make sure the docker daemon is running
+
+On Fedora, RHEL and CentOS
+<command> sudo systemctl start docker
+
+On Debian and Ubunut, the docker daemon will start automatically.
+
+Step 6: Use a texteditor to create a dockerfile. It should contain the following:
+
+FROM httpd:2.4
+COPY ./public-html/index.html htdocs/
+COPY ./public-html/at_logo_white.png htdocs/
+EXPOSE 80
+
+Step 7: save the dockerfile in the Docker directory. Make sure it has no file extension (so just dockerfile, not dockerfile.txt)
+
+Step 8: now it's time so spin up a Linux machine in Azure! First, install the AZ CLI tool from Microsoft.
+
+Windows
+https://aka.ms/installazurecliwindows
+
+MacOS
+<command> brew update && brew install azure-cli
+
+Debian & Ubuntu
+<command> curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+Fedora, RHEL & CentOS
+<command> sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+<command> sudo sh -c 'echo -e "[azure-cli]
+name=Azure CLI
+baseurl=https://packages.microsoft.com/yumrepos/azure-cli
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/azure-cli.repo'
+
+<command> sudo yum install azure-cli
+
+Step 9: open script.sh and have a look at it.
+
+Step 10: run the script! make sure you have the rights to do so
+<command> chmod +x script.sh
+<command> ./script.sh
+
+Step 11: just wait now. A lot of things will happen automatically. Azure will spin up an Ubuntu VM and Docker will be installed via the CLI.
+
+Step 12: we now are going to login on the VM
+<command> source config/variables
+<command> ssh -i $ssh_key -l "$admin" "$fqdn" -o StrictHostKeyChecking=no
+
+** YOU ARE NOW CONNECTED TO THE UBUNTU VM IN AZURE **
+
+Step 13: make a new directory for our git repository (which contains the app)
+<command> mkdir App
+
+Step 14: go to the new directory
+<command> cd App
+
+Step 15: clone the git repository from Github
+<command> git clone https://github.com/Strobodov/App.git
+
+Step 16: let's build a container! Make sure the current directory in your terminal is the App directory. You can do this by:
+<command> cd ~/App
+<command> sudo docker build /usr/local/bin/App/docker --tag=mywebapp
+
+Step 17: the container is now ready to run!
+<command> sudo docker run -d -p 80:80 mywebapp
+
+Step 18: great! You have now deployed your first webapp in Azure! Go test it! Open your browser and visit:
+http://webapp-atcomputing.westeurope.cloudapp.azure.com

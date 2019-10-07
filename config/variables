@@ -1,0 +1,8 @@
+admin="atcomputing"
+ssh_key="~/.ssh/id_rsa"
+group_name="mywebapp"
+az_location="westeurope"
+vm_name="webappvm"
+dns_name="webapp-atcomputing"
+path="/home/$admin/MyApp"
+fqdn="$dns_name.westeurope.cloudapp.azure.com"
