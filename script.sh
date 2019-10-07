@@ -3,49 +3,58 @@
 ####################################################################################
 #DISCLAIMER
 #This script should only be used for testing and NOT for any kind of production environment. There has been no focus on any subject regarding security, redundancy or reliability!
+#Strobodov - 2019 - @AT Computing
 ####################################################################################
 
+#read variables from config file. 
 source config/variables
+
+#	read Azure username & password to log in
+#   !!! Make sure this file does NOT get public !!!
+#
+source config/cred
+
+#login to Azure using AZ CLI
 az login -u $azure -p $azure_password
 wait
+
 #define name of the resource group and Azure region you want to deploy in. (see Azure documentation for current list of options)
-az group create -n "<<RESOURCE GROUP NAME>>" --location "<<AZURE REGION NAME"
+az group create -n $group_name --location $az_location
 wait
-echo "Resource Group ready!"
+echo -e "\e[34mResource Group ready\e[0m"
 
-#define what name you want to give the VM and DNS. Make sure these names are identical in the config/variables file!
-az vm create -n "<<VM NAME>>" -g "<<RESOURCE GROUP NAME" --admin-username $admin --generate-ssh-keys --image ubuntults --verbose --public-ip-address-dns-name <<DNS NAME>> --size Standard_D4_v3
+#deploy VM in azure. Make sure you have filled out all key value paires in config/variables
+az vm create --name $vm_name --resource-group $group_name --admin-username $admin --generate-ssh-keys --image ubuntults --verbose --public-ip-address-dns-name $dns_name --size Standard_D2_v3
 wait
-echo "Virtual Server ready!"
+echo -e "\e[34mVirtual Server ready\e[0m"
 
-#log into the server and install updates and various applications & packages
-ssh -i <PATH TO SSH KEY> -l "$admin" "$fqdn" -o StrictHostKeyChecking=no <<EOF
+#publish port 80 to the outside world (to make sure your webapp can be reached)
+az vm open-port --resource-group $group_name --name $vm_name --port 80
 
-#update server 
-sudo apt update && sudo apt upgrade --assume-yes --ignore-missing
-wait
+#log into the Ubuntu VM in Azure
+ssh -i $ssh_key -l "$admin" "$fqdn" -o StrictHostKeyChecking=no <<EOF
+
+#update the server (this may take a while)
+#sudo apt update && sudo apt upgrade --assume-yes --ignore-missing
+#wait
 
 #install Docker
 sudo apt-get install docker.io --assume-yes
 wait
 
-#install Virtualbox
-sudo apt-get install virtualbox --assume-yes
+#make a new folder for the Git repo
+mkdir $path
+cd $path
+
+#clone the git repo from github
+git clone https://github.com/Strobodov/App.git
 wait
 
-#install Minikube
-curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_1.3.1.deb \
- && sudo dpkg -i minikube_1.3.1.deb
+#build the docker container
+sudo docker build $path/App/docker --tag=mywebapp
 wait
 
-#set virtualbox as default virtual  host
-minikube config set vm-driver virtualbox
-
-#install kubectl
-curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
-minikube start
-
-#install Helm and start Tiller
-sudo snap install helm --classic
-helm init --history-max 200
+#run the container
+sudo docker run -d -p 80:80 mywebapp
 EOF
+echo -e "\e[34mYour @AT Computing Webapp is ready\e[0m"
