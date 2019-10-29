@@ -4,7 +4,7 @@ This webbapp is written in Bash as a demonstration of Infrastructure as a Code. 
 
 **It is meant for demonstration purposes only.**
 
-The webapp consists of the following documents and folder:
+The webapp consists of the following documents and folders:
 - config/variables\
 This file contains all variables for the environment, such as the Azure location (the datacenter region), name of the admin-account, name of the VM and also the FQDN on which the webapp will be reachable on the internet. Please refer to the Azure documentation for all current Azure locations.
 
