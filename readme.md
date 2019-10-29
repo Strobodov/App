@@ -20,6 +20,6 @@ This folder contains the index.html file and a logo of AT Computing. The html-fi
 - scrips.sh\
 This is the Bash-script that actually makes all the stuff work. Every step of the script has comments, so it should be pretty easy and straightforward to read what is does. If everythings goes according to plan, your webapp should be running in the Azure cloud within a couple of minutes.
 
-## removing the webapp\
+## removing the webapp
 As soon as your done with the app, you can easily remove the whole resource group with one command:\
 `az group delete --name $group_name --yes`
