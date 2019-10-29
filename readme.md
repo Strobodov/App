@@ -1,6 +1,6 @@
 # MyWebApp
 
-This webbapp is written in Bash as a demonstration of Infrastructure as a Code. It combines and show the power of CLI, Cloud, Linux and (docker) containers.
+This webbapp is deployed via a script that's written in Bash as a demonstration of Infrastructure as a Code. It combines and show the power of CLI, Cloud, Linux and (docker) containers.
 
 **It is meant for demonstration purposes only.**
 
@@ -15,7 +15,7 @@ This file contains the credentials to login to Azure. Of course, this file is em
 This is the construction manual for the docker container. It pulls an (Apache) httpd container image from the public docker registry, which acts as a webserver.
 
 - docker/public-html\
-This folder contains the index.html file and a logo of AT Computing. The html-file is just a simple page with Bootstrap as CSS embedded via a CDN. No magic here.
+This folder contains the index.html file and a logo of [AT Computing](https://atcomputing.nl). The html-file is just a simple page with Bootstrap as CSS embedded via a CDN. No magic here.
 
 - scrips.sh\
 This is the Bash-script that actually makes all the stuff work. Every step of the script has comments, so it should be pretty easy and straightforward to read what is does. If everythings goes according to plan, your webapp should be running in the Azure cloud within a couple of minutes.
