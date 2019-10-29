@@ -6,7 +6,7 @@ This webbapp is written in Bash as a demonstration of Infrastructure as a Code, 
 
 The webapp consists of the following documents and folder:
 - config/variables\
-This file contains al variables for the environment, such as the Azure location (the datacenter region), name of the admin-account, name of the VM and also the FQDN on which the webapp will be reachable on the internet.
+This file contains all variables for the environment, such as the Azure location (the datacenter region), name of the admin-account, name of the VM and also the FQDN on which the webapp will be reachable on the internet. Please refer to the Azure documentation for all current Azure locations.
 
 - config/cred\
 This file contains the credentials to login to Azure. Of course, this file is empty. You should enter your own credentials. Please make sure you do not put file on your own Github account with your credentials in it.
@@ -19,6 +19,8 @@ This folder contains the index.html file and a logo of AT Computing. The html-fi
 
 - scrips.sh\
 This is the Bash-script that actually makes all the stuff work. Every step of the script has comments, so it should be pretty easy and straightforward to read what is does. If everythings goes according to plan, your webapp should be running in the Azure cloud within a couple of minutes.
+
+*The script currently deploy a Standard D2 V3 Ubuntu 18.04 LTS Virtual Machine. You can adapt this if you would like another type of VM. Since the rest of the script is written for Ubuntu, you might need to change some things if you switch to e.g. CentOS.*
 
 ## removing the webapp
 As soon as your done with the app, you can easily remove the whole resource group with one command:\
