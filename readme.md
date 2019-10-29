@@ -1,6 +1,6 @@
 # MyWebApp
 
-This webbapp is written in Bash as a demonstration of Infrastructure as a Code, combined with Cloud and the use of a (docker) container. 
+This webbapp is written in Bash as a demonstration of Infrastructure as a Code. It combines and show the power of CLI, Cloud, Linux and (docker) containers.
 
 **It is meant for demonstration purposes only.**
 
