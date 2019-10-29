@@ -20,7 +20,7 @@ This folder contains the index.html file and a logo of AT Computing. The html-fi
 - scrips.sh\
 This is the Bash-script that actually makes all the stuff work. Every step of the script has comments, so it should be pretty easy and straightforward to read what is does. If everythings goes according to plan, your webapp should be running in the Azure cloud within a couple of minutes.
 
-*The script currently deploy a Standard D2 V3 Ubuntu 18.04 LTS Virtual Machine. You can adapt this if you would like another type of VM. Since the rest of the script is written for Ubuntu, you might need to change some things if you switch to e.g. CentOS.*
+*The script currently deploys a Standard D2 V3 Ubuntu 18.04 LTS VM. You can adapt this if you would like another type of VM. Please see Azure documentation for the current availible VM types in the Azure region you prefer. Since the rest of the script is written for Ubuntu, you might need to change some things if you switch to e.g. CentOS.*
 
 ## removing the webapp
 As soon as your done with the app, you can easily remove the whole resource group with one command:\
