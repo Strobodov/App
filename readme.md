@@ -12,7 +12,7 @@ This file contains all variables for the environment, such as the Azure location
 This file contains the credentials to login to Azure. Of course, this file is empty. You should enter your own credentials. Please make sure you do not put file on your own Github account with your credentials in it.
 
 - docker/dockerfile\
-This is the construction manual for the docker container. It pulls a (Apache) httpd container image from the public docker registry, which acts as a webserver.
+This is the construction manual for the docker container. It pulls an (Apache) httpd container image from the public docker registry, which acts as a webserver.
 
 - docker/public-html\
 This folder contains the index.html file and a logo of AT Computing. The html-file is just a simple page with Bootstrap as CSS embedded via a CDN. No magic here.
