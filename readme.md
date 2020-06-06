@@ -1,6 +1,6 @@
 # MyWebApp
 
-This webbapp is deployed via a script that's written in Bash as a demonstration of Infrastructure as a Code. It combines and show the power of CLI, Cloud, Linux and (docker) containers.
+This webbapp is deployed via a script that's written in Bash as a demonstration of Infrastructure as a Code. It combines and shows the power of CLI, Cloud, Linux and (docker) containers. A version with other Cloud environments then Azure and a version based on a deployment template are still in development.
 
 **It is meant for demonstration purposes only.**
 
