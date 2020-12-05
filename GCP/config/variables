@@ -1,0 +1,5 @@
+admin="atcomputing"
+ssh_key="~/.ssh/id_rsa"
+vm_name="webappvm"
+path="/home/$admin/MyApp"
+fqdn="$vm_name.c.$projectID.internal"

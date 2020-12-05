@@ -1,4 +1,3 @@
 FROM httpd:2.4
 COPY ./public-html/index.html htdocs/
 COPY ./public-html/at_logo_white.png htdocs/
-COPY 000-default.conf etc/apache2/sites-available/
