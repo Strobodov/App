@@ -11,6 +11,7 @@ source config/variables
 
 #	read Azure username & password to log in
 #   !!! Make sure this file does NOT get public !!!
+# you should consider using a Service Principal instead of a user account...
 #
 source config/cred
 
